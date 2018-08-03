@@ -1,0 +1,74 @@
+---
+title: "Getting started with the CLiC client"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Getting started}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+
+```{r, echo = FALSE, message = FALSE}
+#knitr::opts_chunk$set(
+#  comment = "#",
+#    error = FALSE,
+#     tidy = FALSE,
+#    cache = FALSE,
+# collapse = TRUE)
+options(width = 100)
+```
+
+```{r}
+library(clicclient)
+```
+
+Find out what texts are available in CLiC
+```{r}
+lookup <- clic_lookup()
+lookup
+```
+
+Filter what is available
+```{r}
+lookup[lookup$author == "Thomas Hardy", ]
+```
+
+Fetch a text
+```{r}
+Tess <- clic_texts("Tess")
+str(Tess, nchar.max = 200)
+```
+
+Fetch the tokens for a text
+```{r}
+tokens <- clic_tokens('Tess')
+str(tokens)
+```
+
+
+Fetch the tokens for a set of texts, in this case all quotes text in novels by Jane Austen
+```{r}
+wanted <- lookup[lookup$author == "Jane Austen", ]$id
+wanted
+
+austen_quotes <- clic_tokens(wanted, subset = "quote")
+str(austen_quotes)
+```
+
+or if you want to keep each text separate
+```{r}
+austen_quotes <- sapply(wanted, clic_tokens, subset = "quote")
+str(austen_quotes)
+
+sum(sapply(austen_quotes, length))
+```
+
+Get some clusters for the Jane Austen novels
+```{r}
+austen_clusters <- clic_clusters(shortname = wanted, length = 5, cutoff = 5, subset = "quote")
+head(austen_clusters, 10)
+```
+

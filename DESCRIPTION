@@ -1,0 +1,28 @@
+Encoding: UTF-8
+Package: clicclient
+Type: Package
+Title: Client for the CLiC API
+Version: 0.1-0
+Date: 2018-08-02
+Authors@R:
+    c(person('Anthony','Hennessey',email='anthony.hennessey@nottingham.ac.uk',role=c('aut','cre')),
+    person('Jamie','Lentin',email='jamie.lentin@shuttlethread.com',role='aut'),
+    person('Viola','Wiegand',email='v.wiegand@bham.ac.uk',role='ctb'),
+    person('Michaela','Mahlberg',email='m.a.mahlberg@bham.ac.uk',role='fnd'))
+Description: Fetch data available to the CLiC web interface <http://clic.bham.ac.uk> by directly calling the CLiC API from R.
+URL: 
+License: GPL (>= 3)
+Depends:
+    R (>= 3.2.0),
+Imports:
+    httr,
+    jsonlite,
+    data.table (>= 1.9.6)
+Suggests: 
+    unittest,
+    knitr,
+    rmarkdown
+VignetteBuilder:
+    knitr
+BugReports: https://github.com/birmingham-ccr/clicclient/issues
+LazyData: yes
