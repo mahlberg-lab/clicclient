@@ -5,10 +5,10 @@ Title: Client for the CLiC API
 Version: 0.1-0
 Date: 2018-08-02
 Authors@R:
-    c(person('Anthony','Hennessey',email='anthony.hennessey@nottingham.ac.uk',role=c('aut','cre')),
+    c(person('Anthony','Hennessey',email='anthony.hennessey@nottingham.ac.uk',role=c('aut','cre'), comment = c(ORCID = "0000-0002-5091-368X")),
     person('Jamie','Lentin',email='jamie.lentin@shuttlethread.com',role='aut'),
-    person('Viola','Wiegand',email='v.wiegand@bham.ac.uk',role='ctb'),
-    person('Michaela','Mahlberg',email='m.a.mahlberg@bham.ac.uk',role='fnd'))
+    person('Viola','Wiegand',email='v.wiegand@bham.ac.uk',role='ctb', comment = c(ORCID = "0000-0001-6746-6620")),
+    person('Michaela','Mahlberg',email='m.a.mahlberg@bham.ac.uk',role='fnd', comment = c(ORCID = "0000-0002-4598-8011")))
 Description: Fetch data available to the CLiC web interface <http://clic.bham.ac.uk> by directly calling the CLiC API from R.
 URL: 
 License: GPL (>= 3)
