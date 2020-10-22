@@ -1,4 +1,5 @@
 export("clic_clusters")
+export("clic_concordance")
 export("clic_lookup")
 export("clic_tokens")
 export("clic_texts")
@@ -7,7 +8,7 @@ export("clic_get_user_agent")
 
 importFrom("utils", "packageVersion", "head", "tail")
 
-importFrom("data.table", "rbindlist", "setkeyv", ":=", "shift")
+importFrom("data.table", "rbindlist", "setkeyv", ":=", "shift", "setDF")
 importFrom("httr", "modify_url", "GET", "http_error", "http_type", "add_headers", "status_code", "content")
 importFrom("jsonlite", "fromJSON")
 

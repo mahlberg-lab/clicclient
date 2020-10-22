@@ -5,7 +5,7 @@
 # - query: endpoint specific parameters as a querystring
 #
 clic_request <- function(
-    endpoint = c("subset", "corpora", "cluster"),
+    endpoint = c("subset", "corpora", "cluster", "concordance"),
     query = NULL
 ) {
     endpoint <- match.arg(endpoint)
