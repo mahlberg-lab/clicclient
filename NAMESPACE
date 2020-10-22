@@ -1,5 +1,6 @@
 export("clic_clusters")
 export("clic_concordance")
+export("clic_keyword")
 export("clic_lookup")
 export("clic_subset")
 export("clic_tokens")
