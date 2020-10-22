@@ -9,11 +9,12 @@ clic_request <- function(
     query = NULL
 ) {
     endpoint <- match.arg(endpoint)
+    if(is.null(query)) query <- ""
     uri <- modify_url("",
         scheme = "http",
         hostname = get('HOSTNAME', pos = pkg_vars),
         path = sprintf("/api/%s", endpoint),
-        query = ifelse(is.null(query), "", query)
+        query = query
     )
     ua <- paste(get('UA', pos = pkg_vars), " (clicclient v", packageVersion("clicclient"), ")", sep = "") 
     req <- GET(uri, add_headers('User-Agent' = ua, 'Accept' = "application/json"))
