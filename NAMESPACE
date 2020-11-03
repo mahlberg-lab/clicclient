@@ -10,6 +10,7 @@ export("clic_set_user_agent")
 export("clic_get_user_agent")
 
 importFrom("utils", "packageVersion", "head", "tail")
+importFrom("stats", "setNames")
 
 importFrom("data.table", "rbindlist", "setkeyv", ":=", "shift", "setDF")
 importFrom("httr", "modify_url", "GET", "http_error", "http_type", "add_headers", "status_code", "content")
