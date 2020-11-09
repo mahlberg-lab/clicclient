@@ -1,4 +1,4 @@
-concordance_df <- function(x) {
+concordance_df <- function(x, metadata = FALSE) {
   left_context <- x[[1]]
   
   left_context_string <- paste(left_context[1:length(left_context) - 1], collapse = "")
@@ -19,16 +19,27 @@ concordance_df <- function(x) {
   
   book_title <- result_metadata[[1]]
   
-  data.frame(
+  X <- data.frame(
     left             = left_context_string,
     node             = node_string,
     right            = right_context_string,
     book             = book_title,
     stringsAsFactors = FALSE
   )
+  
+  if(metadata) {
+    X$chapter <- position_in_book_metadata[[1]]
+    X$paragraph <- position_in_book_metadata[[2]]
+    X$sentence <- position_in_book_metadata[[3]]
+    X$begin <- result_metadata[[2]]
+    X$end <- result_metadata[[3]]
+  }
+  
+  return(X)
+  
 }
 
-clic_concordance <- function(corpora, q, contextsize = 3) {
+clic_concordance <- function(corpora, q, contextsize = 3, metadata = FALSE) {
   
   ql <- setNames(as.list(corpora), rep("corpora", length(corpora)))
   qq <- setNames(as.list(q), rep("q", length(q)))
@@ -39,6 +50,6 @@ clic_concordance <- function(corpora, q, contextsize = 3) {
   
   r <- clic_request(endpoint = "concordance", query = ql)
   
-  df <- setDF(rbindlist(lapply(r$data, concordance_df)))
+  df <- setDF(rbindlist(lapply(r$data, concordance_df, metadata)))
   df
 }
