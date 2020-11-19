@@ -33,15 +33,20 @@ subset_df <- function(x, metadata = FALSE) {
   return(X)
 }
 
-clic_subset <- function(corpora, subset, contextsize = 3, metadata = FALSE) {
+clic_subset <- function(corpora, subset, contextsize = 3, metadata = FALSE, json = FALSE) {
   
   ql <- setNames(as.list(corpora), rep("corpora", length(corpora)))
   
   ql$subset <- subset
   ql$contextsize = contextsize
   
-  r <- clic_request(endpoint = "subset", query = ql)
+  r <- clic_request(endpoint = "subset", query = ql, json = json)
+
+  if(json) {
+    return(r)
+  } else {
+    df <- setDF(rbindlist(lapply(r$data, subset_df, metadata)))
+    return(df)
+  }
   
-  df <- setDF(rbindlist(lapply(r$data, subset_df, metadata)))
-  df
 }

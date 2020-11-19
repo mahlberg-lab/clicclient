@@ -5,8 +5,9 @@
 # - query: endpoint specific parameters as a querystring
 #
 clic_request <- function(
-    endpoint = c("subset", "corpora", "cluster", "concordance", "subset", "keyword", "count"),
-    query = NULL
+    endpoint = c("subset", "corpora", "cluster", "concordance", "subset", "keyword", "count", "metadata"),
+    query = NULL,
+    json = FALSE
 ) {
     endpoint <- match.arg(endpoint)
     if(is.null(query)) query <- ""
@@ -30,6 +31,10 @@ clic_request <- function(
     if (!is.null(rv$error)) stop("API returned error: ", rv$error$message)
     if (!is.null(rv$warn)) cat("API returned warning: ", rv$warn$message)
     if (!is.null(rv$info)) cat("API returned info: ", rv$info$message)
-    return(rv)
+    if(json) {
+      return(req)
+    } else {
+      return(rv)
+    }
 }
 

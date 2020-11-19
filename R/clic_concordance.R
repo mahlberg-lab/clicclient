@@ -39,7 +39,7 @@ concordance_df <- function(x, metadata = FALSE) {
   
 }
 
-clic_concordance <- function(corpora, q, subset = "all", contextsize = 3, metadata = FALSE) {
+clic_concordance <- function(corpora, q, subset = "all", contextsize = 3, metadata = FALSE, json = FALSE) {
   
   ql <- setNames(as.list(corpora), rep("corpora", length(corpora)))
   qq <- setNames(as.list(q), rep("q", length(q)))
@@ -49,8 +49,12 @@ clic_concordance <- function(corpora, q, subset = "all", contextsize = 3, metada
   ql$contextsize = contextsize
   ql$subset = subset
   
-  r <- clic_request(endpoint = "concordance", query = ql)
+  r <- clic_request(endpoint = "concordance", query = ql, json = json)
   
-  df <- setDF(rbindlist(lapply(r$data, concordance_df, metadata)))
-  df
+  if(json) {
+    return(r)
+  } else {
+    df <- setDF(rbindlist(lapply(r$data, concordance_df, metadata)))
+    return(df)
+  }
 }
