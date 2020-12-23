@@ -7,24 +7,18 @@
 }
 
 \usage{
-    clic_concordance(corpora, subset, q, contextsize, metadata)
+    clic_concordance(corpora, q, contextsize)
 }
 
 \arguments{
     \item{corpora}{
         1+ corpus name (e.g. 'dickens') or book name ('AgnesG') to search within
     }
-    \item{subset}{
-        subset to search through, one of shortsus/longsus/nonquote/quote/all. Default 'all' (i.e. all text)
-    }
     \item{q}{
         1+ string to search for. If multiple terms are provided, we will search for each in turn
     }
     \item{contextsize}{
         Size of context window around search results. Default 0.
-    }
-    \item{metadata}{
-        Optional data to return.
     }
 }
 

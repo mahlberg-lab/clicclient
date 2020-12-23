@@ -3,6 +3,7 @@
 
 \title{Fetch subset}
 \description{
+    Returns subsets of given texts, for example quotations.
 }
 
 \usage{
@@ -23,6 +24,7 @@
 
 \value{
     Returns a \code{data.frame}, one entry per result.
+}
 
 \seealso{
     \url{https://github.com/birmingham-ccr/clic/blob/2.1/server/clic/subset.py}

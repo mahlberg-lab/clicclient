@@ -7,7 +7,7 @@
 }
 
 \usage{
-    clic_count(corpora, subset, metadata)
+    clic_count(corpora, subset)
 }
 
 \arguments{
@@ -16,9 +16,6 @@
     }
     \item{subset}{
         subset to search through, one of shortsus/longsus/nonquote/quote/all. Default 'all' (i.e. all text)
-    }
-    \item{metadata}{
-        Optional data to return.
     }
 }
 
