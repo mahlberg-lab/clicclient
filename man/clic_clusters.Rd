@@ -7,7 +7,7 @@
 }
 
 \usage{
-    clic_clusters(shortname, length, cutoff = 5, subset = NULL)
+    clic_clusters(shortname, length, cutoff = 5, subset = NULL, json = FALSE)
 }
 
 \arguments{
@@ -27,6 +27,9 @@
     \item{subset}{
         A string containing Any one of \dQuote{shortsus}, \dQuote{longsus},
         \dQuote{nonquote} and \dQuote{quote}.
+    }
+    \item{json}{
+        JSON format. TRUE/FALSE.
     }
 }
 

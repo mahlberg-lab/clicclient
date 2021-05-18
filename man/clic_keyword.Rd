@@ -15,7 +15,9 @@
 }
 
 \usage{
-    clic_keyword(corpora, refcorpora, subset, refsubset, clusterlength, pvalue)
+    clic_keyword(corpora, refcorpora, subset = c("all"), refsubset =
+                   c("all"), clusterlength = 3, pvalue = 1e-04, json =
+                   FALSE)
 }
 
 \arguments{
@@ -40,6 +42,9 @@
       values: 0.0001, 0.001, 0.01, or 0.05.
       If any other value is chosen, it is ignored and no filtering on
       p_value is done.
+    }
+    \item{json}{
+      JSON format. TRUE/FALSE.
     }
 }
 

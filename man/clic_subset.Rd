@@ -7,7 +7,8 @@
 }
 
 \usage{
-    clic_subset(corpora, subset, contextsize)
+    clic_subset(corpora, subset, contextsize = 3, metadata = FALSE,
+                   json = FALSE)
 }
 
 \arguments{
@@ -18,7 +19,13 @@
         subset to search through, one of shortsus/longsus/nonquote/quote/all. Default 'all' (i.e. all text)
     }
     \item{contextsize}{
-        size of context window around search results. Default 0.
+        size of context window around search results. Default 3.
+    }
+    \item{metadata}{
+        Return metadata. TRUE/FALSE.
+    }
+    \item{json}{
+        JSON format. TRUE/FALSE.
     }
 }
 

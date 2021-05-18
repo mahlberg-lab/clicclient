@@ -7,7 +7,8 @@
 }
 
 \usage{
-    clic_concordance(corpora, q, contextsize)
+    clic_concordance(corpora, q, subset = "all", contextsize = 3,
+        metadata = FALSE, json = FALSE)
 }
 
 \arguments{
@@ -17,8 +18,18 @@
     \item{q}{
         1+ string to search for. If multiple terms are provided, we will search for each in turn
     }
+    \item{subset}{
+        A string containing Any one of \dQuote{shortsus}, \dQuote{longsus},
+        \dQuote{nonquote} and \dQuote{quote}.
+    }
     \item{contextsize}{
-        Size of context window around search results. Default 0.
+        Size of context window around search results. Default 3.
+    }
+    \item{metadata}{
+        Return metadata. TRUE/FALSE.
+    }
+    \item{json}{
+        JSON format. TRUE/FALSE.
     }
 }
 
