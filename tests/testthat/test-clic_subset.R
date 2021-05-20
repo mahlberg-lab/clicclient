@@ -9,13 +9,27 @@ test_that("parsing subset response works", {
   )
   
   expected_df <- data.frame(
-    left = "the room,",
-    node = "'God grant he be not disappointed! I know not how he would bear it",
+     left = "the room,",
+     node = "'God grant he be not disappointed! I know not how he would bear it",
     right = "",
-    book = "AgnesG"
+     book = "AgnesG"
   )
   
   expect_equal(subset_df(response_json), expected_df)
+  
+  expected_metadata_df <- data.frame(
+         left = "the room,",
+         node = "'God grant he be not disappointed! I know not how he would bear it",
+        right = "",
+         book = "AgnesG",
+      chapter = 1,
+    paragraph = 9,
+     sentence = 31,
+        begin = 7358,
+          end = 7431
+  )
+  
+  expect_equal(subset_df(response_json, metadata = TRUE), expected_metadata_df)
 })
 
 test_that("building subset query works", {
