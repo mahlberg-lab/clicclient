@@ -27,14 +27,19 @@ clic_request <- function(
     if (http_type(req) != "application/json") {
         stop("API did not return JSON")
     }
-    rv <- fromJSON( content(req, as = "text", encoding = "UTF-8") )
-    if (!is.null(rv$error)) stop("API returned error: ", rv$error$message)
-    if (!is.null(rv$warn)) cat("API returned warning: ", rv$warn$message)
-    if (!is.null(rv$info)) cat("API returned info: ", rv$info$message)
+
+    response_content <- content(req, as = "text", encoding = "UTF-8")
+      
     if(json) {
-      return(req)
+      rv <- response_content
     } else {
-      return(rv)
+      rv <- fromJSON( response_content )
+      
+      if (!is.null(rv$error)) stop("API returned error: ", rv$error$message)
+      if (!is.null(rv$warn)) cat("API returned warning: ", rv$warn$message)
+      if (!is.null(rv$info)) cat("API returned info: ", rv$info$message)
     }
+    
+    return(rv)
 }
 
