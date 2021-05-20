@@ -9,11 +9,11 @@ subset_df <- function(response_data, metadata = FALSE) {
   )
   
   if(metadata) {
-      result$chapter <- response_data[[5]][[1]]
-    result$paragraph <- response_data[[5]][[2]]
-     result$sentence <- response_data[[5]][[3]]
-        result$begin <- response_data[[4]][[2]]
-          result$end <- response_data[[4]][[3]]
+      result$chapter <- as.numeric(response_data[[5]][[1]])
+    result$paragraph <- as.numeric(response_data[[5]][[2]])
+     result$sentence <- as.numeric(response_data[[5]][[3]])
+        result$begin <- as.numeric(response_data[[4]][[2]])
+          result$end <- as.numeric(response_data[[4]][[3]])
   }
   
   return(result)
