@@ -39,6 +39,28 @@ concordance_df <- function(x, metadata = FALSE) {
   
 }
 
+#' Fetch concordance
+#'
+#' @param corpora 1+ corpus name (e.g. 'dickens') or book name ('AgnesG')
+#' to search within
+#' @param q 1+ string to search for. If multiple terms are provided, we will
+#' search for each in turn
+#' @param subset  A string containing Any one of \dQuote{shortsus},
+#' \dQuote{longsus}, \dQuote{nonquote} and \dQuote{quote}.
+#' @param contextsize Size of context window around search results. Default 3.
+#' @param metadata Return metadata. TRUE/FALSE.
+#' @param json JSON format. TRUE/FALSE.
+#'
+#' @return a \code{data.frame}, one entry per result. Each item is an array with the following items:
+#'   \itemize{
+#'     \item The left context window (if ``contextsize`` > 0, otherwise omitted)
+#'     \item The node (i.e. the text searched for)
+#'     \item The right context window (if ``contextsize`` > 0, otherwise omitted)
+#'     \item Result metadata
+#'     \item Position-in-book metadata
+#'   }
+#' @export
+#' @seealso \url{https://github.com/birmingham-ccr/clic/blob/2.1/server/clic/concordance.py}
 clic_concordance <- function(corpora, q, subset = "all", contextsize = 3, metadata = FALSE, json = FALSE) {
   
   ql <- setNames(as.list(corpora), rep("corpora", length(corpora)))

@@ -1,3 +1,19 @@
+#' Count words
+#' 
+#' Word counts within subsets.
+#'
+#' @param corpora 1+ corpus name (e.g. 'dickens') or book name ('AgnesG') to
+#'   search within
+#' @param subset subset to search through, one of
+#'   shortsus/longsus/nonquote/quote/all. Default 'all' (i.e. all text)
+#' @param metadata Return metadata. TRUE/FALSE.
+#'
+#' @return a \code{data.frame}, one entry per book. The first item is the book
+#'   ID in question, the remaining items are the counts in the subsets, the order
+#'   matching the subset querystring parameter.
+#' @export
+#' 
+#' @seealso \url{https://github.com/birmingham-ccr/clic/blob/2.1/server/clic/count.py}
 clic_count <- function(corpora, subset = c("all", "shortsus", "longsus", "nonquote", "quote"), metadata = FALSE) {
 
   ql <- setNames(as.list(corpora), rep("corpora", length(corpora)))
