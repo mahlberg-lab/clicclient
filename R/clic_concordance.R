@@ -9,44 +9,31 @@
 #' @return a data frame
 #' 
 #' @keywords internal
-concordance_df <- function(x, metadata = FALSE) {
-  left_context <- x[[1]]
+concordance_df <- function(response_data, metadata = FALSE) {
+ 
+     left_context <- response_data[[1]]
+             node <- response_data[[2]]
+    right_context <- response_data[[3]]
+  result_metadata <- unlist(response_data[[4]])
   
-  left_context_string <- paste(left_context[1:length(left_context) - 1], collapse = "")
-  left_context_words <- unlist(left_context[length(left_context)])
-  
-  node <- x[[2]]
-  
-  node_string <- paste(node[1:length(node) - 1], collapse = "")
-  node_words <- unlist(node[length(node)])
-  
-  right_context <- x[[3]]
-  
-  right_context_string <- paste(right_context[1:length(right_context) - 1], collapse = "")
-  right_context_words <- unlist(right_context[length(right_context)])
-  
-  result_metadata <- unlist(x[[4]])
-  position_in_book_metadata <- unlist(x[[5]])
-  
-  book_title <- result_metadata[[1]]
-  
-  X <- data.frame(
-    left             = left_context_string,
-    node             = node_string,
-    right            = right_context_string,
-    book             = book_title,
+  result <- data.frame(
+                left = paste(left_context[1:length(left_context) - 1], collapse = ""),
+                node = paste(node[1:length(node) - 1], collapse = ""),
+               right = paste(right_context[1:length(right_context) - 1], collapse = ""),
+                book = result_metadata[[1]],
     stringsAsFactors = FALSE
   )
   
   if(metadata) {
-    X$chapter <- position_in_book_metadata[[1]]
-    X$paragraph <- position_in_book_metadata[[2]]
-    X$sentence <- position_in_book_metadata[[3]]
-    X$begin <- result_metadata[[2]]
-    X$end <- result_metadata[[3]]
+    position_in_book_metadata <- unlist(response_data[[5]])
+               result$chapter <- position_in_book_metadata[[1]]
+             result$paragraph <- position_in_book_metadata[[2]]
+              result$sentence <- position_in_book_metadata[[3]]
+                 result$begin <- result_metadata[[2]]
+                   result$end <- result_metadata[[3]]
   }
   
-  return(X)
+  return(result)
   
 }
 
