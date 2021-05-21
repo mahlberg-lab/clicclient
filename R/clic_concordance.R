@@ -37,14 +37,36 @@ concordance_df <- function(response_data, metadata = FALSE) {
   
 }
 
+#' A query list for concordance queries.
+#'
+#' Builds a query list to pass to clic_request when
+#' calling the concordance endpoint.
+#'
+#' @param params list of parameters
+#'
+#' @return query list for subset endpoint
+#' 
+#' @keywords internal
+concordance_query_list <- function(params) {
+  ql <- setNames(as.list(params$corpora), rep("corpora", length(params$corpora)))
+  qq <- setNames(as.list(params$q), rep("q", length(params$q)))
+  
+  ql <- c(ql, qq)
+  
+  ql$contextsize = params$contextsize
+  ql$subset = params$subset
+  
+  return(ql)
+}
+
 #' Fetch concordance
 #'
 #' @param corpora 1+ corpus name (e.g. 'dickens') or book name ('AgnesG')
-#' to search within
+#'   to search within
 #' @param q 1+ string to search for. If multiple terms are provided, we will
-#' search for each in turn
+#'   search for each in turn
 #' @param subset  A string containing Any one of \dQuote{shortsus},
-#' \dQuote{longsus}, \dQuote{nonquote} and \dQuote{quote}.
+#'   \dQuote{longsus}, \dQuote{nonquote} and \dQuote{quote}.
 #' @param contextsize Size of context window around search results. Default 3.
 #' @param metadata Return metadata. TRUE/FALSE.
 #' @param json JSON format. TRUE/FALSE.
@@ -61,20 +83,17 @@ concordance_df <- function(response_data, metadata = FALSE) {
 #' @seealso \url{https://github.com/birmingham-ccr/clic/blob/2.1/server/clic/concordance.py}
 clic_concordance <- function(corpora, q, subset = "all", contextsize = 3, metadata = FALSE, json = FALSE) {
   
-  ql <- setNames(as.list(corpora), rep("corpora", length(corpora)))
-  qq <- setNames(as.list(q), rep("q", length(q)))
-  
-  ql <- c(ql, qq)
-  
-  ql$contextsize = contextsize
-  ql$subset = subset
-  
-  r <- clic_request(endpoint = "concordance", query = ql, json = json)
+  clic_response <- clic_request(
+    endpoint = "concordance",
+    query = concordance_query_list(list(corpora = corpora, q = q, subset = subset, contextsize = contextsize)),
+    json = json
+  )
   
   if(json) {
-    return(r)
+    result <- clic_response
   } else {
-    df <- setDF(rbindlist(lapply(r$data, concordance_df, metadata)))
-    return(df)
+    result <- setDF(rbindlist(lapply(clic_response$data, concordance_df, metadata)))
   }
+  
+  return(result)
 }
