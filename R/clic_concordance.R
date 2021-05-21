@@ -1,3 +1,14 @@
+#' Build one row of a concordance data frame
+#'
+#' Creates a data frame corresponding to a single response from the
+#' concordance endpoint.
+#'
+#' @param x list of concordance data from CLiC concordance endpoint
+#' @param metadata Get metadata. TRUE/FALSE
+#'
+#' @return a data frame
+#' 
+#' @keywords internal
 concordance_df <- function(x, metadata = FALSE) {
   left_context <- x[[1]]
   
